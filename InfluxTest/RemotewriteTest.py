@@ -1,4 +1,4 @@
-INFLUXDB_TOKEN = "wvwquD8ewzvaDJH_zHWeGEW4AZ-h-73yBuF0gsJ4QRiocZBpZ222FP68VuFLybDB55TlKRgWiLW1V8OQP9h9Sw=="
+INFLUXDB_TOKEN = "9YTeOCLLlxZ1EiGtmAunLYpQnPsCHM-fA9jIA3falkUsp26KVPqZh5MVLSqhZzlCVrBYZUDQV7y1oL3AldAQuA=="
 
 import influxdb_client, os, time
 from influxdb_client import InfluxDBClient, Point, WritePrecision
