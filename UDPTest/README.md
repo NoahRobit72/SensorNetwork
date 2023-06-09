@@ -1,0 +1,1 @@
+These script test if I can send data via UPT port 8888 and listen to the port. 

@@ -6,11 +6,11 @@ from influxdb_client import InfluxDBClient, Point, WritePrecision
 from influxdb_client.client.write_api import SYNCHRONOUS
 
 # MQTT broker information
-broker = "172.21.197.185"
+broker = "192.168.12.32"
 port = 1883
 topic = "chat"
 
-# MQTT Info
+# InFlux Info
 token = os.environ.get("INFLUXDB_TOKEN")
 org = "sensorweb"
 url = "http://localhost:8086"
