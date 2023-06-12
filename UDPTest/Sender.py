@@ -1,18 +1,12 @@
 import socket
 
-def send_udp_message(message, ip_address, port):
-    # Create a UDP socket
-    client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    
-    # Send the UDP packet
-    client_socket.sendto(message.encode(), (ip_address, port))
-    
-    # Close the socket
-    client_socket.close()
+target_ip = "192.168.12.32"  # Replace with the recipient's IP address
+target_port = 9999  # Replace with the recipient's port number
 
-# Usage example
-message = "Hello, receiver!"
-ip_address = "localhost"  # Replace with the receiver's IP address
-port = 8888
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-send_udp_message(message, ip_address, port)
+while True:
+    message = input("Enter a message: ")
+    sock.sendto(message.encode(), (target_ip, target_port))
+
+sock.close()
