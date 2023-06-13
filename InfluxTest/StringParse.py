@@ -1,45 +1,27 @@
 ## this script will parse an input and save the values of the string as elements in an array
 # Influx imports
-import influxdb_client, os, time
-from influxdb_client import InfluxDBClient, Point, WritePrecision
-from influxdb_client.client.write_api import SYNCHRONOUS
+import numpy as np
+import matplotlib.pyplot as plt
 
-# InFlux Info
-token = os.environ.get("INFLUXDB_TOKEN")
-org = "sensorweb"
-url = "http://localhost:8086"
-write_client = influxdb_client.InfluxDBClient(url=url, token=token, org=org)
-bucket="RemoteBucket1"
 
-write_api = write_client.write_api(write_options=SYNCHRONOUS)
 
 
 def parseString(inputString):
-    dataArray = []
+    dataArray = np.empty((50, 2))
+    count = 0    
     dataPoints = inputString.split(",",2)
     pointsString = dataPoints[2].replace(",", "") 
+    epochTime = float(dataPoints[1])
     pointsString = pointsString.strip(" ")
     stringArray = pointsString.split(" ")
-     
-    print(len(stringArray))
-    print(stringArray)
-    
+        
     for a in stringArray:
-        sendDataPoint(a)
-    
+        
+        dataArray[count][1] = a
+        dataArray[count][0] = epochTime
+        epochTime+=.005
+        count+=1  
     return dataArray
-
-# Function to send a datapoint to the influx database
-def sendDataPoint(message):
-    SmValue = int(message)
-
-    point = (
-        Point("census")
-        .tag("location", "Sensor1")
-        .field("Tempature", SmValue)
-    )
-    write_api.write(bucket=bucket, org=org, record=point)
-    
 
 
 
