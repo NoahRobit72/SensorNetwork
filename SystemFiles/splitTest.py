@@ -1,7 +1,17 @@
-def FindSource(inputString):
-    source = inputString.split(" ", 2)
-    print(source[0])
-    return source
+import asyncio
 
-    
-FindSource("esp 1686580202.219 49 59")
+async def loop1():
+    while True:
+        print("hi mom")
+        await asyncio.sleep(.001)  # Add a sleep to avoid blocking the event loop
+
+async def loop2():
+    while True:
+        print("hi dad")
+        await asyncio.sleep(.001)  # Add a sleep to avoid blocking the event loop
+
+# Create and run the coroutines concurrently
+async def main():
+    await asyncio.gather(loop1(), loop2())
+
+asyncio.run(main())

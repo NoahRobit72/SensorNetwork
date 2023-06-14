@@ -34,7 +34,6 @@ def sendDataPoint(message):
     write_api.write(bucket=bucket, org=org, record=point)
     
         
-
     
 # Create MQTT client
 client = mqtt.Client()

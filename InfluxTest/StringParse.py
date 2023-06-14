@@ -17,7 +17,7 @@ def parseString(inputString):
         
     for a in stringArray:
         
-        dataArray[count][1] = a
+        dataArray[count][1] = float(a)
         dataArray[count][0] = epochTime
         epochTime+=.005
         count+=1  

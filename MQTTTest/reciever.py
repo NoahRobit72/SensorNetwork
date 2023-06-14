@@ -3,7 +3,7 @@ import paho.mqtt.client as mqtt
 # MQTT broker information
 broker = "192.168.12.32"
 port = 1883
-topic = "chat"
+topic = "ESP"
 
 # Create MQTT client
 client = mqtt.Client()
