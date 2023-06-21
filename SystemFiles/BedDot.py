@@ -3,7 +3,6 @@
 ## This file is a combination of MQTTTest/reciever.py and InfluxTest/SinglePoint.py
 
 import paho.mqtt.client as mqtt
-import asyncio
 import datetime
 import influxdb_client
 from influxdb_client.client.write_api import SYNCHRONOUS
@@ -12,7 +11,7 @@ import socket
 import sys
 
 # MQTT broker information
-broker = "192.168.12.32"
+broker = ""
 port = 1883
 topic = "SensorData"
 
@@ -38,7 +37,7 @@ host = "0.0.0.0"  # Listen on all available network interfaces
 UDPport = 8888  # Port to listen on
 
 #Mqtt
-broker = "192.168.12.32"
+broker = "localhost"
 port = 1883
 topic = "SensorData"
 
@@ -76,9 +75,9 @@ def InfluxUDP(inputString):
     dataArray = ParseStringUDP(inputString)
     for i in range(len(dataArray)-1):
         p = influxdb_client.Point("ChickenLab").tag("Source", source).field("Seismic", float(dataArray[i][1])) # Index could be wrong here
-        print("printing the data as: data: ",(dataArray[i][1]))
+        # print("printing the data as: data: ",(dataArray[i][1]))
         write_api.write(bucket=bucket, org=org, record=p)
-    #print("Data Packet sent to: ", source)
+    print("Data Packet sent from: ", source)
 
     
 def ParseStringUDP(inputString):

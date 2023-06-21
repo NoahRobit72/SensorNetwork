@@ -1,9 +1,9 @@
 import paho.mqtt.client as mqtt
 
 # MQTT broker information
-broker = "192.168.12.32"
+broker = "localhost"
 port = 1883
-topic = "ESP"
+topic = "SensorData"
 
 # Create MQTT client
 client = mqtt.Client()

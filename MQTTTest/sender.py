@@ -1,7 +1,7 @@
 import paho.mqtt.client as mqtt
 
 # MQTT broker information
-broker = "192.168.12.32"
+broker = "localhost"
 port = 1883
 topic = "SensorData"
 
@@ -14,7 +14,7 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message(client, userdata, msg):
     message = msg.payload.decode()
-    print(f"Received message: {message}")
+    #print(f"Received message: {message}")
 
 def main():
     client.on_connect = on_connect

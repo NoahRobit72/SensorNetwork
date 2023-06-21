@@ -23,7 +23,7 @@ import socket
 import paho.mqtt.client as mqtt
 
 # MQTT broker information
-broker = "192.168.12.32"
+broker = "0.0.0.0"
 port = 1883
 topic = "SensorData"
 
@@ -49,7 +49,7 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message(client, userdata, msg):
     message = msg.payload.decode()
-    print(f"Received message: {message}")
+    # print(f"Data packet recieved!")
     ParseMessage(message)
 
 def main():
@@ -63,10 +63,13 @@ def ParseMessage(inputString):
     source = inputString.split(" ", 2)[0]
     if(source == "ESP"):
         InfluxESP(inputString)
+        print("Data backet recieved from ESP")
     elif(source == "UDP"):
         InfluxUDP(inputString)
+        print("Data backet recieved from NewDot")
+
     else:
-        print("hi")
+        print("Serial Data")
         
         
 # Writing Functions
@@ -76,7 +79,6 @@ def InfluxESP(inputString):
     source, ept, tempature, humidity = ParseStringESP(inputString)
     p = influxdb_client.Point("ChickenLab").tag("Source", source).field("temperature", float(tempature)).field("humidity", float(humidity))
     write_api.write(bucket=bucket, org=org, record=p)
-    print("Data Packet sent to: ", source)
     
 def InfluxUDP(inputString):
     # print("welcome to the UDP Sender")
@@ -86,8 +88,6 @@ def InfluxUDP(inputString):
     for i in range(len(dataArray)-1):
         p = influxdb_client.Point("ChickenLab").tag("Source", source).field("Seismic", float(dataArray[i][1])) # Index could be wrong here
         write_api.write(bucket=bucket, org=org, record=p)
-    print("Data Packet sent to: ", source)
-
 
 
 
